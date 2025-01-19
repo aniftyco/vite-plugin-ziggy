@@ -7,7 +7,7 @@ export default (config?: Config): Plugin => {
   const { configResolved, handleHotUpdate } = run([
     {
       name: 'ziggy-generator',
-      run: ['php', 'artisan', 'ziggy:generate', 'node_modules/vite-plugin-ziggy/routes/index', '--types-only'],
+      run: ['php', 'artisan', 'ziggy:generate', 'node_modules/vite-plugin-ziggy/routes', '--types-only'],
       condition: (file) => file.includes('/routes/') && file.endsWith('.php'),
     },
   ]);
