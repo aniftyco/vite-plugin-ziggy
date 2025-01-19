@@ -1,0 +1,36 @@
+{
+  "name": "vite-plugin-ziggy",
+  "version": "0.0.0",
+  "description": "Vite plugin for Ziggy",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "ziggy"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "start": "vite",
+    "build": "tsc -p tsconfig.json --outDir dist",
+    "prepublishOnly": "npm run build"
+  },
+  "prettier": "@aniftyco/prettier",
+  "dependencies": {
+    "vite-plugin-run": "^0.6.1"
+  },
+  "devDependencies": {
+    "@aniftyco/prettier": "^0.1.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4"
+  }
+}
