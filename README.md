@@ -18,7 +18,7 @@ import ziggy from 'vite-plugin-ziggy';
 export default defineConfig({
   plugins: [
     ...
-    ziggyPlugin({
+    ziggy({
       sail: true, // Uses Sail instead of PHP
       group: 'api',
       url: 'http://laravel-app.test',
