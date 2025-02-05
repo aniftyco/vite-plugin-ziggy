@@ -16,10 +16,16 @@ import { defineConfig } from 'vite';
 import ziggy from 'vite-plugin-ziggy';
 
 export default defineConfig({
-    plugins: [
-        ...
-        ziggy(),
-    ],
+  plugins: [
+    ...
+    ziggyPlugin({
+      sail: true, // Uses Sail instead of PHP
+      group: 'api',
+      url: 'http://laravel-app.test',
+      only: ['admin.*'],
+      except: ['debugbar.*'],
+    }),
+  ],
 });
 ```
 
@@ -44,8 +50,13 @@ Ziggy's `route()` to auto complete for you.
 
 This plugin allows you to set the following configuration:
 
-| key    | description                       | required | default                                 |
-| ------ | --------------------------------- | -------- | --------------------------------------- |
-| path   | The path to output the types file | `NO`     | `node_modules/vite-plugin-ziggy/routes` |
-| only   | Include _ONLY_ these routes       | `NO`     | `[]`                                    |
-| except | All routes _EXCEPT_ these         | `NO`     | `[]`                                    |
+| Key         | Description                                     | Required | Default                                 |
+| ----------- | ----------------------------------------------- | -------- | --------------------------------------- |
+| `path`      | The path to output the types file               | ❌ No    | `node_modules/vite-plugin-ziggy/routes` |
+| `only`      | Include _ONLY_ these routes                     | ❌ No    | `[]`                                    |
+| `except`    | All routes _EXCEPT_ these                       | ❌ No    | `[]`                                    |
+| `sail`      | Use `sail` instead of the `php` command         | ❌ No    | `false`                                 |
+| `group`     | Route group to generate                         | ❌ No    | `undefined` (not set by default)        |
+| `url`       | The application URL                             | ❌ No    | `undefined` (not set by default)        |
+| `types`     | Generate TypeScript declaration file            | ❌ No    | `true`                                  |
+| `typesOnly` | Generate _only_ the TypeScript declaration file | ❌ No    | `true`                                  |
