@@ -9,12 +9,24 @@
   ],
   "type": "module",
   "exports": {
-    ".": {
-      "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+    "./build": {
+      "default": "./dist/build.js",
+      "types": "./dist/build.d.ts"
+    },
+    "./config": {
+      "default": "./dist/config.js",
+      "types": "./dist/config.d.ts"
+    },
+    "./utils": {
+      "default": "./dist/utils.js",
+      "types": "./dist/utils.d.ts"
     },
     "./routes": {
       "types": "./routes.d.ts"
+    },
+    ".": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "types": "./dist/index.d.ts",
@@ -32,6 +44,7 @@
   },
   "devDependencies": {
     "@aniftyco/prettier": "^0.1.0",
+    "@types/node": "^22.13.1",
     "prettier": "^3.3.3",
     "typescript": "^5.2.2",
     "vite": "^5.3.4"
