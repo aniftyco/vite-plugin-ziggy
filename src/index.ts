@@ -138,21 +138,35 @@ export default (config: Config = {}): Plugin => {
     except: [],
   };
 
-  const version = getComposerPackageVersion();
-  const cmd = buildCommand(version, { ...defaultConfig, ...config });
+  try {
+    const version = getComposerPackageVersion();
+    const cmd = buildCommand(version, { ...defaultConfig, ...config });
 
-  const { configResolved, handleHotUpdate } = run([
-    {
-      name: 'ziggy-generator',
-      run: cmd,
-      condition: (file) =>
-        file.includes('/routes/') && file.endsWith('.php'),
-    },
-  ]);
+    const { configResolved, handleHotUpdate } = run([
+      {
+        name: 'ziggy-generator',
+        run: cmd,
+        condition: (file) =>
+          file.includes('/routes/') && file.endsWith('.php'),
+      },
+    ]);
+    return {
+      name: 'ziggy-plugin',
+      configResolved,
+      handleHotUpdate,
+    };
+  } catch (error) {
+    console.error('\n[vite-plugin-ziggy] Error:');
+    if (error instanceof Error) {
+      console.error(error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error(error.stack);
+      }
+    } else {
+      throw error;
+    }
+  }
 
-  return {
-    name: 'ziggy-plugin',
-    configResolved,
-    handleHotUpdate,
-  };
+  return {} as Plugin;
+
 };
