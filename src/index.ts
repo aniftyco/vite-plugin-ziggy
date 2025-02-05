@@ -55,7 +55,6 @@ export type Config = {
 };
 
 const ZIGGY_PACKAGE_NAME = 'tightenco/ziggy';
-const SUPPORTED_VERSIONS = ['1', '2'];
 
 function getComposerPackageVersion(): string {
   try {
@@ -78,12 +77,6 @@ function getComposerPackageVersion(): string {
     }
 
     const majorVersion = match[1];
-    if (!SUPPORTED_VERSIONS.includes(majorVersion)) {
-      throw new Error(
-        `Unsupported Ziggy version: ${majorVersion}. Supported versions: ${SUPPORTED_VERSIONS.join(', ')}`,
-      );
-    }
-
     return majorVersion;
   } catch (error) {
     if (
@@ -113,7 +106,7 @@ function buildCommand(
   if (config.group) cmd.push('--group', config.group);
   if (config.url) cmd.push('--url', config.url);
 
-  if (SUPPORTED_VERSIONS.includes(version)) {
+  if (['1', '2'].includes(version)) {
     if (config.types) cmd.push('--types');
     if (config.typesOnly) cmd.push('--types-only');
 
