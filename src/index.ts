@@ -104,7 +104,7 @@ function buildCommand(
   },
 ): string[] {
   const cmd = [
-    config.sail ? 'sail' : 'php',
+    config.sail && !process.env.LARAVEL_SAIL ? 'sail' : 'php',
     'artisan',
     'ziggy:generate',
     config.path,
@@ -148,6 +148,7 @@ export default (config: Config = {}): Plugin => {
         run: cmd,
         condition: (file) =>
           file.includes('/routes/') && file.endsWith('.php'),
+        
       },
     ]);
     return {
